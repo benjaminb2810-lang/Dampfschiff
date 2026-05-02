@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dampfschiff Grafrath – Das bayerische Amper-Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14100a;
+    --bg2: #20160d;
+    --cream: #fff4d6;
+    --gold: #d9a441;
+    --gold-light: #f0c56f;
+    --rust: #a23f1f;
+    --bavarian-blue: #0b72b9;
+    --bavarian-blue-dark: #07528a;
+    --wood: #6f3f20;
+    --text: #f3e4c3;
+    --muted: #c8ae86;
+    --white: #fff;
+    --border: rgba(217,164,65,0.28);
+    --diamond: rgba(255,255,255,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background:
+      linear-gradient(135deg, rgba(11,114,185,0.08) 25%, transparent 25%) 0 0 / 72px 72px,
+      linear-gradient(225deg, rgba(11,114,185,0.08) 25%, transparent 25%) 0 0 / 72px 72px,
+      var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background:
+      linear-gradient(90deg, rgba(7,82,138,0.22), transparent 28%, transparent 72%, rgba(7,82,138,0.22)),
+      rgba(20,16,10,0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--bavarian-blue);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 68px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cream); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--bavarian-blue);
+    color: var(--white) !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 700 !important;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.18) inset;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.11) 25%, transparent 25%) 0 0 / 86px 86px,
+      linear-gradient(225deg, rgba(11,114,185,0.34) 25%, transparent 25%) 0 0 / 86px 86px,
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(111,63,32,0.52) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(7,82,138,0.45), rgba(20,16,10,0.88) 55%, #14100a);
+  }
+  /* Decorative wave lines */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 43px,
+      rgba(255,244,214,0.07) 43px,
+      rgba(255,244,214,0.07) 44px
+    );
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 34%;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(217,164,65,0.2), transparent 64%),
+      linear-gradient(0deg, #14100a, transparent);
+  }
+  .bavarian-ribbon {
+    position: absolute; top: 68px; left: 0; right: 0; height: 18px; z-index: 2;
+    background:
+      linear-gradient(135deg, var(--bavarian-blue) 25%, var(--white) 25%, var(--white) 50%, var(--bavarian-blue) 50%, var(--bavarian-blue) 75%, var(--white) 75%) 0 0 / 36px 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.45);
+  }
+  .hero-crest {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    padding: 0.55rem 1.05rem;
+    margin-bottom: 1.4rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    color: var(--cream);
+    background: rgba(7,82,138,0.42);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.28);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-crest strong { color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 0; }
+  .hero-eyebrow {
+    position: relative;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block;
+    width: 60px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+  .hero h1 {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    text-shadow: 0 4px 24px rgba(0,0,0,0.45);
+    margin-bottom: 0.3rem;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    margin-bottom: 3rem;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+  .hero-badges {
+    position: relative;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.9s 0.25s ease both;
+  }
+  .badge {
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 0.4rem 1.1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    border-radius: 100px;
+    background: rgba(20,16,10,0.48);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .hero-btns {
+    position: relative;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.9s 0.35s ease both;
+  }
+  .btn-primary {
+    background: var(--bavarian-blue);
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(7,82,138,0.35);
+  }
+  .btn-primary:hover { background: var(--bavarian-blue-dark); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(255,244,214,0.72);
+    color: var(--cream);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent; cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    border-radius: 999px;
+  }
+  .btn-outline:hover { background: var(--gold); border-color: var(--gold); color: var(--bg); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--muted); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after {
+    content: ''; display: block;
+    flex: 1; height: 1px; background: var(--border);
+    max-width: 80px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  p { color: var(--muted); margin-bottom: 1rem; }
+
+  .bavarian-trim {
+    height: 16px;
+    background:
+      linear-gradient(135deg, var(--bavarian-blue) 25%, var(--white) 25%, var(--white) 50%, var(--bavarian-blue) 50%, var(--bavarian-blue) 75%, var(--white) 75%) 0 0 / 32px 32px;
+    border-top: 1px solid rgba(255,255,255,0.35);
+    border-bottom: 1px solid rgba(0,0,0,0.35);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-placeholder {
+    width: 100%; aspect-ratio: 4/5;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.16) 25%, transparent 25%) 0 0 / 54px 54px,
+      linear-gradient(225deg, rgba(11,114,185,0.36) 25%, transparent 25%) 0 0 / 54px 54px,
+      linear-gradient(135deg, #6f3f20 0%, #2b170b 52%, #07528a 100%);
+    border: 3px solid rgba(255,244,214,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5.6rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 55px rgba(0,0,0,0.35);
+  }
+  .about-img-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 40% 55%, rgba(255,244,214,0.18), transparent 64%),
+      linear-gradient(0deg, rgba(20,16,10,0.7), transparent 48%);
+  }
+  .about-img-placeholder::after {
+    content: 'Direkt an der Amper';
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--cream);
+    text-align: center;
+  }
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+  }
+  .feature-chip {
+    border: 1px solid var(--border);
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 0.6rem;
+    border-radius: 999px;
+    background: rgba(7,82,138,0.08);
+  }
+  .feature-chip .icon { font-size: 1.1rem; }
+
+  /* ── ÖFFNUNGSZEITEN ── */
+  .hours-section {
+    background:
+      linear-gradient(90deg, rgba(7,82,138,0.12), transparent 35%, transparent 65%, rgba(7,82,138,0.12)),
+      var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .hours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 2rem; }
+  .hours-card {
+    background:
+      linear-gradient(180deg, rgba(255,244,214,0.045), rgba(111,63,32,0.08)),
+      rgba(20,16,10,0.52);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  }
+  .hours-card .day {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .hours-card .time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--cream);
+  }
+  .hours-card .note { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+  .kueche-note {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    display: inline-block;
+  }
+  .hours-center { text-align: center; }
+  .hours-info { font-size: 0.78rem; color: var(--rust); margin-top: 0.6rem; font-weight: 700; letter-spacing: 0.05em; }
+
+  /* ── MENU ── */
+  .menu-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .menu-tab {
+    padding: 0.5rem 1.3rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .menu-tab.active, .menu-tab:hover {
+    background: var(--bavarian-blue);
+    border-color: var(--bavarian-blue);
+    color: var(--white);
+  }
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+  .menu-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .menu-item {
+    background:
+      linear-gradient(90deg, rgba(7,82,138,0.05), transparent 36%),
+      var(--bg);
+    padding: 1.2rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    transition: background 0.2s;
+  }
+  .menu-item:hover { background: rgba(7,82,138,0.12); }
+  .menu-item-name { font-size: 0.9rem; color: var(--text); }
+  .menu-item-desc { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+  .menu-item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--gold);
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* Spezialitätentage */
+  .spezial-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 2rem; }
+  .spezial-card {
+    background:
+      linear-gradient(135deg, rgba(11,114,185,0.12), rgba(217,164,65,0.06)),
+      rgba(20,16,10,0.52);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-radius: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .spezial-card:hover { border-color: var(--bavarian-blue); background: rgba(7,82,138,0.16); }
+  .spezial-day { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .spezial-dish { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--cream); margin-bottom: 0.3rem; }
+  .spezial-price { font-size: 0.82rem; color: var(--muted); }
+  .spezial-note { font-size: 0.72rem; color: var(--muted); margin-top: 1.5rem; font-style: italic; text-align: center; }
+
+  /* ── BIERGARTEN ── */
+  .biergarten-section {
+    background:
+      linear-gradient(135deg, rgba(11,114,185,0.09) 25%, transparent 25%) 0 0 / 78px 78px,
+      linear-gradient(225deg, rgba(255,255,255,0.045) 25%, transparent 25%) 0 0 / 78px 78px,
+      var(--bg2);
+  }
+  .biergarten-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .biergarten-season {
+    background: rgba(7,82,138,0.1);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  .biergarten-season h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1rem; font-size: 1.1rem; }
+  .biergarten-times { display: flex; flex-direction: column; gap: 0.4rem; }
+  .btime { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--muted); }
+  .btime strong { color: var(--text); }
+  .biergarten-menu { margin-top: 1.5rem; }
+  .biergarten-menu h3 { font-family: 'Playfair Display', serif; color: var(--cream); margin-bottom: 1.2rem; font-size: 1.1rem; }
+  .bg-item { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .bg-item:last-child { border-bottom: none; }
+  .bg-price { color: var(--gold); font-family: 'Playfair Display', serif; }
+
+  /* ── EVENTS ── */
+  .events-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .event-card {
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 8px;
+    background:
+      linear-gradient(135deg, rgba(7,82,138,0.09), transparent 58%),
+      rgba(201,164,78,0.03);
+  }
+  .event-card h3 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .event-capacity { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.8rem; font-weight: 700; }
+
+  /* ── RESERVIERUNG ── */
+  .reservation-section {
+    background:
+      linear-gradient(180deg, rgba(111,63,32,0.12), transparent),
+      var(--bg2);
+  }
+  .reservation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .res-info h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 1rem; }
+  .res-phone {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    text-decoration: none;
+    margin: 1.5rem 0;
+    transition: color 0.2s;
+  }
+  .res-phone:hover { color: var(--gold-light); }
+  .res-warning {
+    background: rgba(139,58,30,0.15);
+    border: 1px solid rgba(139,58,30,0.4);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    color: #e89070;
+    margin-top: 1rem;
+  }
+  .res-form {
+    background:
+      linear-gradient(135deg, rgba(11,114,185,0.1), rgba(217,164,65,0.045)),
+      rgba(201,164,78,0.04);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    border-radius: 8px;
+  }
+  .res-form h3 { font-family: 'Playfair Display', serif; color: var(--cream); margin-bottom: 1.5rem; font-size: 1.1rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select option { background: #1a1208; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-bottom: 1.2rem; }
+  .form-submit {
+    width: 100%;
+    background: var(--bavarian-blue);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--bavarian-blue-dark); }
+  .form-success {
+    display: none;
+    text-align: center; padding: 2rem;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .review-card {
+    background:
+      linear-gradient(180deg, rgba(255,244,214,0.04), rgba(7,82,138,0.08)),
+      rgba(201,164,78,0.03);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative;
+  }
+  .review-card::before {
+    content: '"';
+    position: absolute; top: 1rem; left: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; line-height: 1;
+    color: var(--gold); opacity: 0.15;
+  }
+  .review-text { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; font-style: italic; position: relative; z-index: 1; }
+  .review-author { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+  .review-stars { color: var(--gold); font-size: 0.75rem; margin-bottom: 0.5rem; }
+
+  /* ── PARTNER ── */
+  .partner-section {
+    background:
+      linear-gradient(90deg, rgba(7,82,138,0.12), transparent 28%, transparent 72%, rgba(7,82,138,0.12)),
+      var(--bg2);
+  }
+  .partner-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; justify-content: center; }
+  .partner-chip {
+    border: 1px solid var(--border);
+    padding: 0.7rem 1.5rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: rgba(7,82,138,0.08);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .partner-chip:hover { border-color: var(--bavarian-blue); color: var(--cream); }
+
+  /* ── MAP ── */
+  .map-section { padding: 0; }
+  .map-container { position: relative; }
+  .map-overlay {
+    position: absolute; top: 2rem; left: 2rem; z-index: 10;
+    background:
+      linear-gradient(135deg, rgba(7,82,138,0.18), rgba(20,16,10,0.88)),
+      rgba(14,11,7,0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    max-width: 300px;
+  }
+  .map-overlay h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 0.8rem; }
+  .map-overlay p { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .map-overlay .map-phone { color: var(--cream); font-weight: 700; text-decoration: none; font-size: 0.9rem; }
+  .map-info-item { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
+  iframe.map { width: 100%; height: 450px; border: none; display: block; filter: grayscale(30%) invert(5%); }
+
+  /* ── CONTACT STRIP ── */
+  .contact-strip {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+  .contact-strip-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+  }
+  .contact-block h4 { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .contact-block p, .contact-block a { font-size: 0.82rem; color: var(--muted); text-decoration: none; display: block; }
+  .contact-block a:hover { color: var(--cream); }
+  .contact-block strong { color: var(--text); display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 0.8rem; }
+  footer a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid, .biergarten-grid, .reservation-split, .events-cards { grid-template-columns: 1fr; gap: 2rem; }
+    .spezial-grid { grid-template-columns: repeat(2, 1fr); }
+    .menu-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .contact-strip-inner { grid-template-columns: 1fr 1fr; }
+    .about-features { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .map-overlay { max-width: 90%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Dampfschiff <span>Grafrath</span></a>
+  <ul class="nav-links">
+    <li><a href="#ueber-uns">Über uns</a></li>
+    <li><a href="#speisekarte">Speisekarte</a></li>
+    <li><a href="#biergarten">Biergarten</a></li>
+    <li><a href="#veranstaltungen">Events</a></li>
+    <li><a href="#anfahrt">Anfahrt</a></li>
+    <li><a href="#reservierung" class="nav-cta">Reservieren</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="bavarian-ribbon"></div>
+  <div class="hero-crest"><span>🍺</span><strong>Wirtshaus</strong><span>an der Amper</span></div>
+  <div class="hero-eyebrow">Willkommen im Dampfer</div>
+  <h1>Dampfschiff<br><em>Grafrath</em></h1>
+  <p class="hero-sub">Bayerische Wirtshausküche, Biergarten und a guade Zeit direkt an der Amper</p>
+  <div class="hero-badges">
+    <div class="badge">🍺 Augustiner & Schmankerl</div>
+    <div class="badge">🌿 Biergarten an der Amper</div>
+    <div class="badge">🧒 Familienfreundlich</div>
+    <div class="badge">🎉 Feiern bis 60 Pers.</div>
+  </div>
+  <div class="hero-btns">
+    <a href="#reservierung" class="btn-primary">Tisch reservieren</a>
+    <a href="#speisekarte" class="btn-outline">Speisekarte</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Entdecken
+  </div>
+</section>
+<div class="bavarian-trim" aria-hidden="true"></div>
+
+<!-- ÜBER UNS -->
+<section id="ueber-uns">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-img-wrap">
+        <div class="about-img-placeholder">⚓</div>
+      </div>
+      <div>
+        <div class="section-label">Des san mia</div>
+        <h2>Servus! Willkommen<br><em>im Dampfer</em></h2>
+        <p>Bei uns trifft echte bayerische Wirtshausküche auf Amper-Blick, täglich wechselnde Tageskarte und saisonale Schmankerl aus der Region. Unkompliziert, herzlich und mit genau der Gemütlichkeit, die zu Grafrath passt.</p>
+        <p>Im Biergarten mit großem Spielplatz sitzen Familien, Ausflügler und Stammtische zusammen; drinnen warten Gaststube, Wintergarten und Nebenzimmer auf kleine Runden und größere Feiern bis zu je 60 Personen.</p>
+        <p>Kommt's vorbei - wir freuen uns, Sie im „Dampfer" begrüßen zu dürfen!</p>
+        <div class="about-features">
+          <div class="feature-chip"><span class="icon">🏠</span> Gemütliche Gaststube</div>
+          <div class="feature-chip"><span class="icon">🌊</span> Direkt an der Amper</div>
+          <div class="feature-chip"><span class="icon">🌳</span> Großer Biergarten</div>
+          <div class="feature-chip"><span class="icon">🧒</span> Kinderspielplatz</div>
+          <div class="feature-chip"><span class="icon">❄️</span> Kachelofen im Winter</div>
+          <div class="feature-chip"><span class="icon">🎉</span> Wintergarten & Nebenzimmer</div>
+          <div class="feature-chip"><span class="icon">🎸</span> Harfenstammtisch</div>
+          <div class="feature-chip"><span class="icon">🅿️</span> Großer Parkplatz</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÖFFNUNGSZEITEN -->
+<section class="hours-section">
+  <div class="container fade-in">
+    <div class="section-label">Wann wir da san</div>
+    <h2>Öffnungs<em>zeiten</em></h2>
+    <div class="hours-grid">
+      <div class="hours-card">
+        <div class="day">Montag – Freitag</div>
+        <div class="time">11:00 – 22:00</div>
+        <div class="note">Warme Küche bis 21:00 Uhr</div>
+      </div>
+      <div class="hours-card">
+        <div class="day">Samstag</div>
+        <div class="time">10:30 – 22:00</div>
+        <div class="note">Warme Küche bis 21:00 Uhr</div>
+      </div>
+      <div class="hours-card">
+        <div class="day">Sonntag & Feiertage</div>
+        <div class="time">10:30 – 21:00</div>
+        <div class="note">Warme Küche bis 20:30 Uhr</div>
+      </div>
+      <div class="hours-card" style="background:rgba(139,58,30,0.08); border-color:rgba(139,58,30,0.3)">
+        <div class="day" style="color:#e08060">Wichtiger Hinweis</div>
+        <div class="time" style="font-size:1.1rem; color:var(--cream)">Nur Barzahlung</div>
+        <div class="note">Keine Kreditkarten</div>
+      </div>
+    </div>
+    <div class="hours-center">
+      <div class="hours-info">☎ Reservierung: 08144 – 1314 · Keine Reservierungen per E-Mail möglich</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEISEKARTE -->
+<section id="speisekarte">
+  <div class="container fade-in">
+    <div class="section-label">Bayerische Schmankerl</div>
+    <h2>Unsere <em>Speisekarte</em></h2>
+
+    <!-- Spezialitätentage -->
+    <div style="margin-bottom:3rem;">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--gold); margin-bottom:0.5rem; font-size:1.1rem;">Spezialitätentage</h3>
+      <div class="spezial-grid">
+        <div class="spezial-card">
+          <div class="spezial-day">Montag</div>
+          <div class="spezial-dish">Ententag</div>
+          <div class="spezial-price">16,80 €</div>
+        </div>
+        <div class="spezial-card">
+          <div class="spezial-day">Dienstag</div>
+          <div class="spezial-dish">Schnitzeltag</div>
+          <div class="spezial-price">14,80 €</div>
+        </div>
+        <div class="spezial-card">
+          <div class="spezial-day">Mittwoch</div>
+          <div class="spezial-dish">Haxntag</div>
+          <div class="spezial-price">16,80 €</div>
+        </div>
+        <div class="spezial-card">
+          <div class="spezial-day">Donnerstag</div>
+          <div class="spezial-dish">Steaktag</div>
+          <div class="spezial-price">19,80 €</div>
+        </div>
+        <div class="spezial-card">
+          <div class="spezial-day">Freitag</div>
+          <div class="spezial-dish">Ofenkartoffeltag</div>
+          <div class="spezial-price">14,80 €</div>
+        </div>
+      </div>
+      <p class="spezial-note">Solange der Vorrat reicht – ausgenommen Feiertage</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="showTab('suppen')">Suppen & Salate</button>
+      <button class="menu-tab" onclick="showTab('kleine')">Kleine Gerichte</button>
+      <button class="menu-tab" onclick="showTab('haupt')">Hauptgerichte</button>
+      <button class="menu-tab" onclick="showTab('desserts')">Nachspeisen</button>
+      <button class="menu-tab" onclick="showTab('biergarten-karte')">Biergarten</button>
+      <button class="menu-tab" onclick="showTab('getraenke')">Getränke</button>
+    </div>
+
+    <div id="tab-suppen" class="menu-panel active">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">Leberknödelsuppe</div><div class="menu-item-desc">Rinderkraftbrühe mit Schnittlauch</div></div><div class="menu-item-price">6,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Kleiner Salat</div><div class="menu-item-desc">Frische Marktsalate, Hausdressing</div></div><div class="menu-item-price">7,50 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Großer Salat</div><div class="menu-item-desc">Mit Hausdressing, Ei, Oliven und Zwiebeln</div></div><div class="menu-item-price">16,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Bunte Blattsalatvariation</div><div class="menu-item-desc">Sauerrahmdressing, Hähnchenbrust, Reiberdatschi</div></div><div class="menu-item-price">21,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Schweizer Wurstsalat</div><div class="menu-item-desc">Emmentaler, Essiggurken, Zwiebeln und Brot</div></div><div class="menu-item-price">13,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Bayerischer Wurstsalat</div><div class="menu-item-desc">Aus Regensburger mit Zwiebeln und Brot</div></div><div class="menu-item-price">12,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Französische Zwiebelsuppe</div><div class="menu-item-desc">Mit Toast und Emmentaler überbacken</div></div><div class="menu-item-price">8,50 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Gegrillter Ziegenkäse</div><div class="menu-item-desc">An Blattsalaten, Hausdressing, Reiberdatschi, Preiselbeeren</div></div><div class="menu-item-price">20,90 €</div></div>
+      </div>
+    </div>
+
+    <div id="tab-kleine" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">7 Stück Nürnberger</div><div class="menu-item-desc">Auf deftigem Sauerkraut und Meerrettich</div></div><div class="menu-item-price">15,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Currywurst</div><div class="menu-item-desc">Von der Brühpolnischen mit Pommes Frites</div></div><div class="menu-item-price">12,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Allgäuer Käsespätzle</div><div class="menu-item-desc">Mit Röstzwiebeln und gemischtem Salatteller</div></div><div class="menu-item-price">18,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Original Münchner Weißwurst</div><div class="menu-item-desc">Mit hausgemachtem Senf (je Stück) · bis 12:00 Uhr · nur auf Vorbestellung</div></div><div class="menu-item-price">2,50 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Kinderschnitzel</div><div class="menu-item-desc">Vom Schweinelendchen mit Pommes Frites</div></div><div class="menu-item-price">9,50 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Kinderschweinebraten</div><div class="menu-item-desc">Mit Kartoffelknödel (außer mittwochs)</div></div><div class="menu-item-price">9,50 €</div></div>
+      </div>
+    </div>
+
+    <div id="tab-haupt" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">Schnitzel „Wiener Art"</div><div class="menu-item-desc">Vom Schweinerücken, Pommes Frites, gemischter Salatteller</div></div><div class="menu-item-price">20,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Cordon Bleu</div><div class="menu-item-desc">Vom Schweinerücken, Schinken & Emmentaler, Bratkartoffeln</div></div><div class="menu-item-price">25,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Wiener Schnitzel</div><div class="menu-item-desc">Vom Kalbsrücken, Röstkartoffeln, Salat, Preiselbeeren</div></div><div class="menu-item-price">29,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Grillteller „Dampfschiff"</div><div class="menu-item-desc">Versch. Lendchen, Speck, Würstel, Pommes, grüne Bohnen</div></div><div class="menu-item-price">25,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Schwabenteller</div><div class="menu-item-desc">Versch. Lendchen und Speck auf Käsespätzle, Rahmsoße, Röstzwiebeln</div></div><div class="menu-item-price">25,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Wiener Zwiebelrostbraten</div><div class="menu-item-desc">Von der Ochsenlende, Röst- & Schmorzwiebeln, Bratkartoffeln</div></div><div class="menu-item-price">32,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Ochsenlendensteak „Schlanke Linie"</div><div class="menu-item-desc">Mit Meerrettich und großem Salatteller</div></div><div class="menu-item-price">29,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Zanderfilet</div><div class="menu-item-desc">In Mandelbutter gebraten, Petersilienkartoffeln, gemischter Salat</div></div><div class="menu-item-price">25,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Hähnchenbrust vom Grill</div><div class="menu-item-desc">Mit Tomate und Mozzarella überbacken, Salatgarnitur</div></div><div class="menu-item-price">22,50 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Vegetarische Schmankerlplatte</div><div class="menu-item-desc">Mediteranes Gemüse, Rosmarinkartoffeln, Kroketten, Rösti, Reiberdatschi auf Tomatensauce</div></div><div class="menu-item-price">17,80 €</div></div>
+      </div>
+    </div>
+
+    <div id="tab-desserts" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">Kaiserschmarrn</div><div class="menu-item-desc">Mit Rosinen, Mandeln und Rum flambiert, dazu Apfelmus</div></div><div class="menu-item-price">17,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Hausgemachte Apfelkücherl</div><div class="menu-item-desc">In Bierteig, mit Vanilleeis und Sahne</div></div><div class="menu-item-price">8,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Wiener Apfelstrudel</div><div class="menu-item-desc">Mit Vanilleeis und Sahne</div></div><div class="menu-item-price">5,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Wiener Topfenstrudel</div><div class="menu-item-desc">Mit Vanilleeis und Sahne</div></div><div class="menu-item-price">5,80 €</div></div>
+      </div>
+    </div>
+
+    <div id="tab-biergarten-karte" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">Schweinebrustspitz</div><div class="menu-item-desc">Mit Kartoffelsalat</div></div><div class="menu-item-price">13,10 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Spareribs</div><div class="menu-item-desc">Klassisch zubereitet</div></div><div class="menu-item-price">16,20 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Steckerlfisch</div><div class="menu-item-desc">Frisch vom Grill</div></div><div class="menu-item-price">16,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Dampfschiff-Batzda</div><div class="menu-item-desc">Mit Zwiebeln</div></div><div class="menu-item-price">9,00 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Pressack schwarz/weiß</div><div class="menu-item-desc">Mit Zwiebeln und vieles mehr …</div></div><div class="menu-item-price">8,50 €</div></div>
+      </div>
+    </div>
+
+    <div id="tab-getraenke" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-item"><div><div class="menu-item-name">Aperol Spritz</div></div><div class="menu-item-price">9,20 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Hugo</div></div><div class="menu-item-price">7,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Rhabarber Spritz</div></div><div class="menu-item-price">7,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Himbeer Spritz</div></div><div class="menu-item-price">7,90 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Augustiner Hell</div></div><div class="menu-item-price">4,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Alte Marille</div></div><div class="menu-item-price">5,80 €</div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Alte Waldhimbeere</div></div><div class="menu-item-price">5,80 €</div></div>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:2rem; font-size:0.75rem; color:var(--muted); font-style:italic;">Preise inkl. MwSt. · Tageskarte wechselt täglich · Durchgehend warme Küche bis 21:00 Uhr (So./Feiertag bis 20:30 Uhr)</p>
+  </div>
+</section>
+
+<!-- BIERGARTEN -->
+<section id="biergarten" class="biergarten-section">
+  <div class="container fade-in">
+    <div class="section-label">O'zapft is!</div>
+    <h2>Der <em>Biergarten</em></h2>
+    <div class="biergarten-grid">
+      <div>
+        <p>Unser wunderschöner Biergarten liegt direkt an der Amper und lädt in den warmen Monaten zum Verweilen ein. Mit angrenzendem Kinderspielplatz ist er ideal für die ganze Familie – auch ein kleines Bad in der Amper ist möglich!</p>
+        <div class="biergarten-season">
+          <h3>🌞 Saisonale Öffnungszeiten (Mai–September)</h3>
+          <div class="biergarten-times">
+            <div class="btime"><span>Freitag</span><strong>ab 16:00 Uhr</strong></div>
+            <div class="btime"><span>Samstag</span><strong>ab 14:00 Uhr</strong></div>
+            <div class="btime"><span>Sonntag & Feiertage</span><strong>ab 10:30 Uhr</strong></div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem; font-style:italic;">Biergarten geöffnet ab Mai bei schönem Wetter. Öffnungszeiten nach Absprache.</p>
+      </div>
+      <div>
+        <div class="biergarten-menu">
+          <h3>🍖 Biergarten Schmankerl</h3>
+          <div class="bg-item"><span>Schweinebrustspitz mit Kartoffelsalat</span><span class="bg-price">13,10 €</span></div>
+          <div class="bg-item"><span>Spareribs</span><span class="bg-price">16,20 €</span></div>
+          <div class="bg-item"><span>Steckerlfisch</span><span class="bg-price">16,90 €</span></div>
+          <div class="bg-item"><span>Dampfschiff-Batzda mit Zwiebeln</span><span class="bg-price">9,00 €</span></div>
+          <div class="bg-item"><span>Pressack schwarz/weiß mit Zwiebeln</span><span class="bg-price">8,50 €</span></div>
+          <div class="bg-item" style="color:var(--muted); font-style:italic; font-size:0.8rem;"><span>… und vieles mehr!</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERANSTALTUNGEN -->
+<section id="veranstaltungen">
+  <div class="container fade-in">
+    <div class="section-label">Da kem ma zam!</div>
+    <h2>Veranstal<em>tungen</em></h2>
+    <p>Das Dampfschiff bietet die perfekte Kulisse für Ihre nächste Feier – von privaten Festen bis zu Firmenevents. Sprechen Sie uns gerne für individuelle Arrangements an.</p>
+    <div class="events-cards">
+      <div class="event-card">
+        <div class="event-capacity">📋 Bis zu 60 Personen</div>
+        <h3>Nebenzimmer</h3>
+        <p>Unser gemütliches Nebenzimmer mit traditioneller bayerischer Atmosphäre eignet sich ideal für private Feiern, Geburtstagsfeste und Familienfeiern in stilvollem Rahmen.</p>
+      </div>
+      <div class="event-card">
+        <div class="event-capacity">🌿 Bis zu 60 Personen</div>
+        <h3>Wintergarten</h3>
+        <p>Der lichtdurchflutete Wintergarten verbindet das Beste aus beiden Welten – bayerische Gastlichkeit mit dem Charme eines Gartenambientes, das das ganze Jahr über nutzbar ist.</p>
+      </div>
+      <div class="event-card">
+        <div class="event-capacity">🌳 Saisonal</div>
+        <h3>Biergarten</h3>
+        <p>Für sommerliche Feste bietet unser großer Biergarten direkt an der Amper eine unvergessliche Kulisse – ideal für entspannte Grillfeste und gesellige Abende im Freien.</p>
+      </div>
+      <div class="event-card">
+        <div class="event-capacity">🎸 Regelmäßig</div>
+        <h3>Grafrather Harfenstammtisch</h3>
+        <p>Das Dampfschiff ist die Heimat des bekannten Grafrather Harfenstammtisches. Eine lebendige Tradition, die für eine einzigartige und unvergessliche Atmosphäre sorgt.</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem; font-size:0.82rem;">Für Reservierungen und Anfragen wenden Sie sich telefonisch an uns: <a href="tel:+4981441314" style="color:var(--gold);">08144 – 1314</a></p>
+  </div>
+</section>
+
+<!-- RESERVIERUNG -->
+<section id="reservierung" class="reservation-section">
+  <div class="container fade-in">
+    <div class="section-label">Platz sichern</div>
+    <h2>Tisch <em>reservieren</em></h2>
+    <div class="reservation-split">
+      <div class="res-info">
+        <h3>Telefonisch reservieren</h3>
+        <p>Reservierungen nehmen wir ausschließlich telefonisch entgegen. Keine Reservierungen per E-Mail möglich.</p>
+        <a href="tel:+4981441314" class="res-phone">☎ 08144 – 1314</a>
+        <p style="font-size:0.8rem;">Bitte rufen Sie während der Öffnungszeiten an:</p>
+        <p style="font-size:0.8rem; color: var(--text);">Mo–Fr: 11:00–22:00 · Sa: 10:30–22:00 · So & Feiertag: 10:30–21:00</p>
+        <div class="res-warning">
+          ⚠️ Nur Barzahlung möglich – bitte entsprechend vorbereitet kommen.
+        </div>
+      </div>
+      <div class="res-form">
+        <h3>🪑 Tisch-Reservierungsanfrage</h3>
+        <p class="form-note">Diese Anfrage ist unverbindlich. Eine Bestätigung erfolgt ausschließlich telefonisch unter 08144 – 1314.</p>
+        <div id="res-form-content">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Vorname</label>
+              <input type="text" placeholder="Max" id="f-vorname">
+            </div>
+            <div class="form-group">
+              <label>Nachname</label>
+              <input type="text" placeholder="Mustermann" id="f-nachname">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Datum</label>
+              <input type="date" id="f-datum">
+            </div>
+            <div class="form-group">
+              <label>Uhrzeit</label>
+              <select id="f-uhrzeit">
+                <option value="">Uhrzeit wählen…</option>
+                <option>11:00</option><option>11:30</option>
+                <option>12:00</option><option>12:30</option>
+                <option>13:00</option><option>13:30</option>
+                <option>14:00</option><option>14:30</option>
+                <option>15:00</option><option>15:30</option>
+                <option>16:00</option><option>16:30</option>
+                <option>17:00</option><option>17:30</option>
+                <option>18:00</option><option>18:30</option>
+                <option>19:00</option><option>19:30</option>
+                <option>20:00</option><option>20:30</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Personenzahl</label>
+              <select id="f-personen">
+                <option value="">Bitte wählen…</option>
+                <option>1 Person</option><option>2 Personen</option><option>3 Personen</option>
+                <option>4 Personen</option><option>5 Personen</option><option>6 Personen</option>
+                <option>7–10 Personen</option><option>10–20 Personen</option>
+                <option>20–60 Personen (Veranstaltung)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Bereich</label>
+              <select id="f-bereich">
+                <option value="">Kein Wunsch</option>
+                <option>Innenbereich</option>
+                <option>Wintergarten</option>
+                <option>Nebenzimmer</option>
+                <option>Biergarten (saisonal)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Telefonnummer (für Rückruf)</label>
+            <input type="tel" placeholder="+49 …" id="f-tel">
+          </div>
+          <div class="form-group">
+            <label>Anmerkungen</label>
+            <textarea rows="3" placeholder="Besondere Wünsche, Allergien, Anlass…" id="f-anm"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Anfrage absenden</button>
+        </div>
+        <div id="form-success" class="form-success">
+          ✓ Vielen Dank für Ihre Anfrage!<br>
+          <span style="font-size:0.85rem; color:var(--muted); font-family:'Lato',sans-serif; display:block; margin-top:0.8rem;">Bitte rufen Sie zur Bestätigung unter <strong style="color:var(--gold);">08144 – 1314</strong> an.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REZENSIONEN -->
+<section id="rezensionen">
+  <div class="container fade-in">
+    <div class="section-label">Was Gäste sagen</div>
+    <h2>Tolle <em>Gäste</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Leckeres Essen und ein toller Service. Definitiv zu empfehlen.</p>
+        <div class="review-author">— Malte Kliem</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Sehr gutes Essen, absolut gehobene Klasse der gut bürgerlichen Küche! Der Biergarten ist wunderschön, ein toller Spielplatz für Kinder ist dabei.</p>
+        <div class="review-author">— Dominik Sch.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Eine Gastronomie, die einfach rundum glücklich und zufrieden macht!</p>
+        <div class="review-author">— Holger Paape</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Was für eine gemütliche Gaststube … einfach nur zu empfehlen, das Essen ist mega lecker und die Portionen sind mehr als genug! Das Personal ist flott und freundlich!</p>
+        <div class="review-author">— Franzi Laue</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Home of the Grafrather Harfenstammtisch – great atmosphere in a traditional Bavarian Gaststaette with a massive Kachelofen to keep you warm in the winter.</p>
+        <div class="review-author">— Matthew Hawkes</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Absolut klasse. Der Flammkuchen ein absoluter Traum. Und die Bedienung ist der Hammer. Selten so gut gelauntes Personal gesehen. Achtung, wir kommen wieder!</p>
+        <div class="review-author">— Sonja Schubert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section class="partner-section">
+  <div class="container fade-in" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;">Unsere langjährigen Partner</div>
+    <h2>Qualität die <em>man schmeckt</em></h2>
+    <div class="partner-grid">
+      <div class="partner-chip">🍺 Augustiner</div>
+      <div class="partner-chip">🍺 Kaltenberg</div>
+      <div class="partner-chip">☕ Dallmayr</div>
+      <div class="partner-chip">🍦 Nestlé Schöller</div>
+      <div class="partner-chip">🍺 Franziskaner</div>
+      <div class="partner-chip">🍺 Löwenbräu</div>
+      <div class="partner-chip">🥩 Rix Fleisch</div>
+      <div class="partner-chip">Magnus Bauch</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="anfahrt" class="map-section">
+  <div class="map-container">
+    <div class="map-overlay">
+      <h3>📍 Hier san ma!</h3>
+      <p><strong style="color:var(--cream);">Dampfschiff Grafrath</strong></p>
+      <p>Graf-Rasso-Straße 40</p>
+      <p>82284 Grafrath</p>
+      <a href="tel:+4981441314" class="map-phone">☎ 08144 – 1314</a>
+      <div class="map-info-item">🅿️ Großzügiger Parkplatz direkt vorm Haus</div>
+      <div class="map-info-item">🚂 S-Bahn Grafrath ca. 950 m entfernt</div>
+      <div class="map-info-item">💶 Nur Barzahlung</div>
+    </div>
+    <iframe
+      class="map"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2668.1!2d11.0456!3d48.1456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sGraf-Rasso-Stra%C3%9Fe+40%2C+82284+Grafrath!5e0!3m2!1sde!2sde!4v1683900000000!5m2!1sde!2sde&q=Graf-Rasso-Stra%C3%9Fe+40,82284+Grafrath"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Dampfschiff Grafrath Karte">
+    </iframe>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div class="contact-strip-inner">
+    <div class="contact-block">
+      <h4>Adresse</h4>
+      <p>Graf-Rasso-Straße 40</p>
+      <p>D-82284 Grafrath</p>
+    </div>
+    <div class="contact-block">
+      <h4>Reservierung</h4>
+      <a href="tel:+4981441314">☎ 08144 – 1314</a>
+      <p style="margin-top:0.4rem; font-size:0.72rem; font-style:italic;">Keine E-Mail-Reservierungen</p>
+    </div>
+    <div class="contact-block">
+      <h4>Öffnungszeiten</h4>
+      <p>Mo–Fr: 11:00–22:00 Uhr</p>
+      <p>Sa: 10:30–22:00 Uhr</p>
+      <p>So & Feiertag: 10:30–21:00 Uhr</p>
+    </div>
+    <div class="contact-block">
+      <h4>Wichtig</h4>
+      <strong>Nur Barzahlung</strong>
+      <p style="margin-top:0.4rem;">Großer Parkplatz direkt am Haus</p>
+      <p>S-Bahn Grafrath ~950 m</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="margin-bottom:0.8rem; font-family:'Playfair Display',serif; color:var(--gold); font-size:1.1rem;">Dampfschiff Grafrath</div>
+  <div>
+    <a href="https://dampfschiff.com/impressum/" target="_blank">Impressum</a>
+    <a href="https://dampfschiff.com/datenschutz/" target="_blank">Datenschutz</a>
+    <a href="https://dampfschiff.com/speisekarte/" target="_blank">Speisekarte</a>
+    <a href="https://www.facebook.com/DAMPFSCHIFF.GRAFRATH/" target="_blank">Facebook</a>
+  </div>
+  <p style="margin-top:0.8rem; font-size:0.68rem;">© Dampfschiff Grafrath · Graf-Rasso-Straße 40 · 82284 Grafrath · 08144 – 1314</p>
+</footer>
+
+<script>
+  // Tab switching
+  function showTab(id) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Form submit
+  function submitForm() {
+    const vorname = document.getElementById('f-vorname').value.trim();
+    const datum = document.getElementById('f-datum').value;
+    const tel = document.getElementById('f-tel').value.trim();
+    if (!vorname || !datum || !tel) {
+      alert('Bitte füllen Sie mindestens Name, Datum und Telefonnummer aus.');
+      return;
+    }
+    document.getElementById('res-form-content').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Set min date for reservation to today
+  const dateInput = document.getElementById('f-datum');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+  }
+
+  // Fix map iframe with correct coordinates for Grafrath
+  const mapIframe = document.querySelector('iframe.map');
+  mapIframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2668.412!2d11.044!3d48.1403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e7d04c1e4c39d%3A0x58c0aa15c87a6f2d!2sGraf-Rasso-Stra%C3%9Fe%2040%2C%2082284%20Grafrath!5e0!3m2!1sde!2sde!4v1683900000000!5m2!1sde!2sde";
+</script>
+</body>
+</html>
